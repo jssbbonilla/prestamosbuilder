@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view >
+        <f:event type="preRenderView"
+                 listener="#{frmUsuarios.initialize}" />
+        <h:head>
+            <title>Sistema de Prestamos</title>
+        </h:head>
+
+
+        <h:body id="todo" >
+            <ui:composition template="../templates/halftemplate.xhtml">
+                <ui:define name="content">
+                    <p:panel id="superior-externo">
+                        <h:form id="frm-iniciocliente">
+                            <h:panelGrid id="panel-filtro" columns="3" style="background-color:  transparent ; padding-bottom: 5px">
+                                                         <p:commandButton id="btn-agregar-usuario" icon="ui-icon-circle-plus"  
+                                                 class="btn-agregar" 
+                                                 value="Agregar"
+                                                 onclick="PF('agregarUsuario').show();"
+                                                 disabled="#{(user.getRol()!='a')?'true':'false'}"
+                                                 update="user-edit-form:toggleable"
+
+                                                 ></p:commandButton>
+                            </h:panelGrid>    
+                        </h:form>
+                        <div id="user-edit">
+                            <h:form id="user-edit-form">
+                                <p:panel id="toggleable"   collapsed="#{frmUsuarios.editarActivo}" header="Opciones Usuario" toggleable="true" closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:5px; ">
+
+
+
+                                    <h:panelGrid columns="2" >
+
+                                        <h:panelGrid id="gridtwo" columns="6" style="text-align: left;" >
+
+                                            <p:outputLabel for="idu" value="Id" />
+
+                                            <p:inputText  id="idu"  value="#{frmUsuarios.susario.id}"/>
+
+                                            <p:outputLabel for="nombre" value="Nombre" />
+
+
+                                            <p:inputText  id="nombre"  value="#{frmUsuarios.susario.nombre}" />
+                                            <p:outputLabel for="apellido" value="Apellidos" />
+                                            <p:inputText  id="apellido"  value="#{frmUsuarios.susario.apellido}"  />
+                                            <p:outputLabel for="rol" value="Permisos: " />
+                                            <p:selectOneMenu id="rol" appendTo="@this" value="#{frmUsuarios.susario.rol}">
+                                                <f:selectItem itemLabel="Administrador" itemValue="a" />
+                                                <f:selectItem itemLabel="Normal" itemValue="n" />
+                                            </p:selectOneMenu>
+                                            <p:outputLabel for="usuario" value="Usuario: " />
+                                            <p:inputText  id="usuario"  value="#{frmUsuarios.susario.login}" />
+                                            <p:outputLabel  value=" " />
+
+                                            <p:commandButton  value="Realizar" update=":table-users" icon="ui-icon-disk" actionListener="#{frmUsuarios.editar()}"  disabled="#{(user.getRol()!='a')?'true':'false'}" />
+
+
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+
+                                </p:panel>  
+                            </h:form>
+
+
+                        </div>
+                    </p:panel>
+                    <div >
+                        <f:view>
+                            <h:form id="table-users" >
+                                <p:dataTable value="#{frmUsuarios.lsuarios}" id="tb-usuarios" class="tableclass"
+                                             var="item"     
+                                             paginator="true"
+                                             rows="25"
+                                             rowsPerPageTemplate="15,25,40"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             selectionMode="single"
+                                             rowKey="#{item.id}"
+                                             selection="#{frmUsuarios.susario}"
+                                             >
+                                    <p:ajax event="rowSelect" />
+                                    <p:column headerText="Usuario" class="colum-id">
+                                        <f:facet name="header">
+                                            <h:outputText value="Usuario"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.login}"/>
+                                    </p:column >
+
+                                    <p:column headerText="Nombre">
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombre"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nombre}"/>
+                                    </p:column >
+
+                                    <p:column headerText="Rol / Privilegio" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Rol / Privilegio"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.rol}"/>
+                                    </p:column>
+
+                                    <p:column style="width: 70px">
+                                        <f:facet name="header">
+                                        </f:facet>
+
+                                        <p:commandButton id="btn-config" 
+                                                         icon="fa fa-wrench" 
+                                                         class="btn-config"
+                                                         title="Detalles"
+                                                         style="background-color:rgb(253, 152, 36); border: none
+                                                         "
+                                                         actionListener="#{frmUsuarios.setEditarActivo(false)}"
+                                                         update="user-edit-form:toggleable"
+                                                         
+
+
+
+                                                         >
+
+                                        </p:commandButton> 
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+                        </f:view>
+
+
+
+                        <p:growl id="msgs" showDetail="true" />  
+
+
+                    </div>
+
+                    <p:dialog id="dialogo-nuevo" 
+                              modal="false" 
+
+                              style="background-color:#EFEDEF; text-align: center" 
+                              showEffect="blind" hideEffect="blind" 
+                              widgetVar="agregarUsuario"   
+                              header="Usuario"  
+                              draggable="false" 
+                              closeOnEscape="true" 
+                              appendTo="@(body)" 
+
+                              resizable="false">
+                        <p:ajax event="close" 
+
+                                update="" 
+                                immediate="true" global="false" />
+                        <h:form>
+                            <h:panelGrid columns="2" >
+
+                                <h:panelGrid id="grid" columns="2" style="text-align: left;" >
+
+                                    <p:outputLabel  for="nombre" value="Nombre:"/>
+                                    <p:inputText  id="nombre"  value="#{frmUsuarios.usuarionuevo.nombre}" maxlength="45" size="25" />
+
+                                    <p:outputLabel  for="apellidos" value="Apellido:"/>
+                                    <p:inputText  id="apellidos"  value="#{frmUsuarios.usuarionuevo.apellido}" maxlength="45" size="25"/>
+
+                                    <p:outputLabel  for="usuario" value="Usuario:"/>
+                                    <p:inputText  id="usuario"  value="#{frmUsuarios.usuarionuevo.login}" maxlength="45" size="25" />
+
+                                    <p:outputLabel  for="pass" value="Contraseña"/>
+
+                                    <p:password  styleClass="input-user"  id="pass" value="#{frmUsuarios.usuarionuevo.clave}" />
+
+                                    <p:outputLabel  for="rol" value="Rol:"/>
+                                    <p:selectOneMenu id="rol" appendTo="@this" value="#{frmUsuarios.usuarionuevo.rol}">
+                                        <f:selectItem itemLabel="Usuario" itemValue="u" />
+                                        <f:selectItem itemLabel="Administrador" itemValue="a" />
+                                    </p:selectOneMenu>
+
+
+
+
+                                    <p:commandButton  value="Registrar"  update=":msgs" icon="ui-icon-disk" actionListener="#{frmUsuarios.crearCliente()}" oncomplete="PF('agregarUsuario').hide();" disabled="#{(user.getRol()!='a')?'true':'false'}"  />
+                                    <p:commandButton value="Cancelar" 
+                                                     onclick="PF('agregarUsuario').hide();"
+                                                     icon="ui-icon-cancel" 
+                                                     type="button"/>
+
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                    <p:dialog id="dialog-confirm" 
+                              modal="false" 
+
+                              style="background-color:#EFEDEF; text-align: center" 
+                              showEffect="blind" hideEffect="blind" 
+                              widgetVar="confirmrequired"   
+                              header="Requiere auntenticación"  
+                              draggable="false" 
+                              closeOnEscape="true" 
+                              appendTo="@(body)" 
+
+                              resizable="false">
+                        <p:ajax event="close" 
+
+
+                                immediate="true" global="false" 
+                                update="table-users:tb-usuarios"/>
+
+                        <h:form  >
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Contraseña : "></p:outputLabel>
+                                <p:password id="nonFeedback" value="#{passwordView.password1}" />
+                                <p:commandButton  value="Confirmar"  actionListener="#{frmUsuarios.editar()}" oncomplete="PF('agregarUsuario').hide();"  update=":msgs" icon="ui-icon-disk" />
+                                <p:outputLabel value=" "></p:outputLabel>
+
+
+                            </p:panelGrid>
+
+
+
+                        </h:form>
+                    </p:dialog>
+
+
+                    <p:sticky target="superior-externo" />
+
+
+
+
+                </ui:define>
+            </ui:composition>
+
+        </h:body>
+    </f:view>
+</html>
+

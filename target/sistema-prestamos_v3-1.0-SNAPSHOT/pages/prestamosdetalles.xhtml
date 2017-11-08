@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
+    <h:head>
+        <title>Prestamos detalles</title>
+        <f:metadata>
+            <f:viewParam name="dui" value="#{frmPrestamoDetalle.duiParam}"/>
+            <f:viewParam name="id" value="#{frmPrestamoDetalle.prestamoParam}"/>
+        </f:metadata>
+        
+    </h:head>
+    <h:body>
+
+        <ui:composition template="../templates/supertemplate.xhtml">
+            <ui:define name="content">
+
+                <h:form id="datos-prestamos">
+                    <div style="margin-bottom: 20px">
+                        <h:panelGrid columns="4" style="width: 50%; background: #ACD0C0; margin: 0 auto; ">
+
+                            <h:panelGrid columns="1"  class="cuadro1">
+                                <h:graphicImage id="pagoIcon"  style="background-color:  transparent" class="icon" name="/images/book-gray128x128.png"  height="100" width="100"/>
+                                <p:outputLabel for="pagoIcon" value="Detalles Prestamos" />
+                            </h:panelGrid>
+
+                            <h:panelGrid id="panel-detalle1" columns="2" class="cuadro2" style="width: 150px">
+                                <p:outputLabel value="ID Prestamos:" for="nprestamos" />
+                                <p:inputText id="nprestamos" value="#{frmPrestamoDetalle.sprestamo.idPrestamo}" title="NPrestamo" readonly="true" />
+                                <p:outputLabel value="DUI:" for="dui" />
+                                <p:inputText id="dui" value="#{frmPrestamoDetalle.sprestamo.dui}" title="DUI" readonly="true" />
+                                <p:outputLabel value="Cliente:" for="cliente" />
+                                <p:inputText id="cliente" value="#{frmPrestamoDetalle.scliente.nombre}" title="Nombre" readonly="true" />
+                                <p:outputLabel value="Apellido:" for="apellido" />
+                                <p:inputText id="apellido" value="#{frmPrestamoDetalle.scliente.apellido}" title="Apellido" readonly="true" />
+                            </h:panelGrid>
+
+                            <h:panelGrid id="panel-detalle2" columns="2" class="cuadro2">
+                                <p:outputLabel value="Monto:" for="monto" />
+                                <p:inputNumber id="monto" value="#{frmPrestamoDetalle.sprestamo.monto}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Monto" readonly="true" symbol="$" />
+                                <p:outputLabel value="Saldo:" for="saldo" />
+                                <p:inputNumber id="saldo" value="#{frmPrestamoDetalle.sprestamo.saldo}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Saldo" readonly="true" symbol="$" />
+                                <p:outputLabel value="N° Cuotas:" for="ncuotas" />
+                                <p:inputText id="ncuotas" value="#{frmPrestamoDetalle.sprestamo.cantidadCuotas}" title="N° Cuotas" readonly="true" />
+                                <p:outputLabel value="Cuota($):" for="cuota" />
+                                <p:inputNumber id="cuota" value="#{frmPrestamoDetalle.sprestamo.valorCuota}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Valor de la Cuota" readonly="true" symbol="$"/>
+                            </h:panelGrid>
+                            
+                            <h:panelGrid columns="2" class="cuadro2">
+                                <p:outputLabel value="Fecha Inicio:" for="fechainiciom" />
+                                <p:inputText id="fechainiciom" readonly="true"
+                                            size="10"
+                                            value="#{frmPrestamoDetalle.eprestamo.fechaInicio}"
+                                            title="Fecha Inicio"
+                                            />
+                                    <p:outputLabel value="Fecha Fin:" for="fechafinm" />
+                                    <p:inputText id="fechafinm" readonly="true"
+                                            size="10"
+                                            value="#{frmPrestamoDetalle.eprestamo.fechaFin}"
+                                            title="Fecha Fin"
+                                            />
+                                    <p:outputLabel value="Fecha Ultimo Pago:" for="fechaultimopagom" />
+                                    <p:inputText id="fechaultimopagom" readonly="true"
+                                            size="10"
+                                            value="#{frmPrestamoDetalle.eprestamo.fechaUltimoPago}"
+                                            title="Fecha Ultimo Pago"
+                                           />
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+                    </div>
+                </h:form>
+
+                <h:form id="frm-actividades" >
+
+                    <p:growl id="msgs" showDetail="true" /> 
+
+                    <p:tabView id="tabs" class="paneltabs">
+                        <p:tab title="Editar Prestamo">
+
+                            <p:panelGrid id="panel-crud" columns="2" style="font-size: 15px;" >
+
+                                <p:panelGrid id="panel-crud1" columns="2"  >
+                                    <p:outputLabel value="ID Prestamos:" for="idprestamos" />
+                                    <p:inputText id="idprestamos" value="#{frmPrestamoDetalle.eprestamo.idPrestamo}" title="NPrestamo" required="true" maxlength="11" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) return false;"/>
+                                    <p:outputLabel value="DUI:" for="dui" />
+                                    <p:inputMask id="dui" mask="99999999-9" value="#{frmPrestamoDetalle.eprestamo.dui}" title="DUI" maxlength="10" />
+                                    <p:outputLabel value="N° de Cuotas:" for="cantidadcuotas" />
+                                    <p:inputText id="cantidadcuotas" value="#{frmPrestamoDetalle.eprestamo.cantidadCuotas}" title="N° de Cuotas" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) return false;"/>
+                                    <p:outputLabel value="Monto($):" for="monto" />
+                                    <p:inputNumber id="monto" value="#{frmPrestamoDetalle.eprestamo.monto}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Monto" symbol="$" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) if (event.which != 46) return false;"/>
+                                    <p:outputLabel value="Valor cuota($):" for="valorcuota" />
+                                    <p:inputNumber id="valorcuota" value="#{frmPrestamoDetalle.eprestamo.valorCuota}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Valor Cliente" symbol="$" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) if (event.which != 46) return false;"/>
+                                    <p:outputLabel value="Tasa Interes(%):" for="tasainteres" />
+                                    <p:inputNumber id="tasainteres" value="#{frmPrestamoDetalle.eprestamo.tasaInteres}" decimalSeparator="." thousandSeparator="," decimalPlaces="4" title="Tasa de Interes" symbol="%" symbolPosition="s" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) if (event.which != 46) return false;"/>
+                                    <p:outputLabel value="Capitalizacion:" for="capitalizacion-p" />
+                                    <p:selectOneMenu id="capitalizacion-p" appendTo="@this" value="#{frmPrestamoDetalle.eprestamo.capitalizacion}"  title="Capitalizacion">
+                                        <f:selectItem itemLabel="Mensual" itemValue="M" />
+                                        <f:selectItem itemLabel="Diaria" itemValue="D" />
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+
+                                <p:panelGrid id="panel-crud2" columns="2">
+                                    <p:outputLabel value="Saldo:" for="saldo" />
+                                    <p:inputNumber id="saldo" value="#{frmPrestamoDetalle.eprestamo.saldo}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Saldo" symbol="$" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) if (event.which != 46) return false;"/>
+                                    <p:outputLabel value="Fecha Inicio:" for="fechainicio" />
+                                    <p:calendar id="fechainicio"
+                                            mask="true"
+                                            size="10"
+                                            pattern="dd/MM/yyyy" 
+                                            effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
+                                            value="#{frmPrestamoDetalle.eprestamo.fechaInicio}"
+                                            title="Fecha Inicio"
+                                            >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                                    <p:outputLabel value="Fecha Fin:" for="fechafin" />
+                                    <p:calendar id="fechafin"
+                                            mask="true"
+                                            size="10"
+                                            pattern="dd/MM/yyyy" 
+                                            effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
+                                            value="#{frmPrestamoDetalle.eprestamo.fechaFin}"
+                                            title="Fecha Fin"
+                                            >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                                    <p:outputLabel value="Fecha Ultimo Pago:" for="fechaultimopago" />
+                                    <p:calendar id="fechaultimopago" 
+                                            mask="true"
+                                            size="10"
+                                            pattern="dd/MM/yyyy" 
+                                            effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
+                                            value="#{frmPrestamoDetalle.eprestamo.fechaUltimoPago}"
+                                            title="Fecha Ultimo Pago"
+                                            >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                                    <p:outputLabel value="Observacion:" for="observacion" />
+                                    <p:inputTextarea id="observacion" value="#{frmPrestamoDetalle.eprestamo.observaciones}" title="Observacion"   />
+                                </p:panelGrid>
+                                <p:commandButton value="Modificar" icon="fa fa-fw fa-floppy-o" class="btn-crear "
+                                                 update="@all" actionListener="#{frmPrestamoDetalle.modificar()}"
+                                                 />
+                            </p:panelGrid>
+                            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"  />
+                        </p:tab>
+
+                    </p:tabView>
+                </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+    </f:view>
+</html>
+

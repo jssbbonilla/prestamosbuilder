@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+    marcons:
+        image: 'ownmariadb'
+        build: ./mariadb/.
+        container_name: 'uesmariadb'
+        environment: 
+        - 'MYSQL_ROOT_PASSWORD=12345'
+        ports:
+        - '3306:3306'
+        volumes:
+        - /mysqlacad:/var/lib/mysql
+    paycons: 
+        image: 'ownpayara'
+        build: ./payara/.   
+        container_name: 'uespayara'
+        depends_on:
+        - 'marcons'
+        ports:
+        - "8080:8080"
+        - "4848:4848"
+        entrypoint:
+        - "./wait-for-mariadb.sh"
+        - "172.17.0.2:3306"
+        - "-t"
+        - "60"
+        - "--"
+        - "bin/asadmin"
+        - "start-domain"
+        - "-v"
+    
+
+
+ 
+   
+    
+        

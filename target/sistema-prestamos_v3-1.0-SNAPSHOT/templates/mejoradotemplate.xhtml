@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="../resources/css/stylePrestamos.css" rel="stylesheet" type="text/css" media="all" /> 
+        <link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="../resources/css/template/footer-with-logo.css" rel="stylesheet" type="text/css" media="all"/>
+        <!-- Bootstrap core CSS -->
+        <link href="../resources/css/bootstrap.min.css" rel="stylesheet"/>
+        <!-- Menu izquierdo for this template -->
+        <link href="../resources/css/template/simple-sidebar.css" rel="stylesheet"/>
+        <title>Template Mejorado</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                
+                <h:form>
+                    <div class="arriba" >
+
+                        <div class="top-bar">
+                            <nav id="menu-nav" class="linkEffects linkHoverEffect_12 nav-cont">
+                                <ul>
+                                   
+                                    <p:splitButton value="#{user.getLogin()}" actionListener="#{buttonView.save}"  icon="fa fa-user-circle-o" >
+
+                                        <p:menuitem value="Salir" actionListener="#{frmUsuarios.logout()}" ajax="false" icon="ui-icon-close" />
+                                        <p:separator />
+                                    </p:splitButton>
+
+                                </ul>
+                            </nav>  
+                            <h2 class="tituloheader"><i ></i> Administración <i  ></i></h2>
+
+
+                        </div>
+                    </div>
+                </h:form>
+                
+            </ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+                    
+                    
+                    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Sis. Prestamos
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Clientes</a>
+                </li>
+                <li>
+                    <a href="#">Prestamos</a>
+                </li>
+                <li>
+                    <a href="#">Pagos</a>
+                </li>
+                <li>
+                    <a href="#">Historial de Pagos</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Reportes</a>
+                </li>
+                <li>
+                    <a href="#">Contactos</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        
+        <!-- CONTENIDO DE LOS DE LOS FORMUALIRIOS -->
+         <div id="content" class="left_content">
+                <ui:insert name="content">
+                    
+                    <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <h1>Simple Sidebar</h1>
+                <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+                    
+        <!-- CONTENIDO DE LE FOOTER -->
+        
+        <div id="bottom">
+            <ui:insert name="bottom">
+                
+                
+                <footer id="myFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>Get started</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Sign up</a></li>
+                        <li><a href="#">Downloads</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h5>About us</h5>
+                    <ul>
+                        <li><a href="#">Company Information</a></li>
+                        <li><a href="#">Contact us</a></li>
+                        <li><a href="#">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Help desk</a></li>
+                        <li><a href="#">Forums</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3 info">
+                    <h5>Informacion</h5>
+                    <p> Somos estudiantes de la Universidad Nacional de El Salvador dispuestos a realizar una una aplicacion web para la asignatura de Diseño de Sistemas II.</p>
+                </div>
+            </div>
+        </div>
+        <div class="second-bar">
+           <div class="container">
+               <h3 class="logo"><h:link value="Sistema Prestamos"></h:link></h3>
+                <div class="social-icons">
+                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+                
+            </ui:insert>
+        </div>
+                    
+                </ui:insert>
+            </div>
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../resources/js/jquery/jquery.min.js"></script>
+    <script src="../resources/js/bootstrap-js/bootstrap.bundle.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+                    
+                    
+                    
+                </ui:insert>
+            </div>
+            
+            
+            
+            
+           
+        </div>
+        
+
+    </h:body>
+
+</html>

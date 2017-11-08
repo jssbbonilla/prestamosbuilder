@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
+    <h:head>
+        <f:metadata>
+            <f:viewParam name="dui" value="#{frmCuota.duiParam}"/>
+            <f:viewParam name="id" value="#{frmCuota.idParam}"/>
+        </f:metadata>
+        <title>Realizar Pago</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="../templates/supertemplate.xhtml">
+            <ui:define name="content">
+
+
+                <h:form id="frm-datos">
+                    <h:panelGrid columns="2" style="margin-left: 3%; ">
+                        <h:panelGrid id="panel-img" class="cuadro1-pago" columns="2" style="background: #F59970; border-radius: 5px;">
+                            <h:graphicImage id="pagoIcon"  style="background-color:  transparent;" class="icon" name="/images/pago128x128.png"  height="100" width="100"/>
+                            <p:outputLabel for="pagoIcon" value="REALIZAR PAGO" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="3" style="width: 70%; height: 150px; margin: 0 auto; background: #AED6F1 ; border-radius: 5px;"> 
+                            <h:panelGrid columns="1">
+                                <h4 class="titulo-pago" style="margin: 0; margin: 1%;">Datos del Cliente</h4>
+                            <h:panelGrid id="panel-detalle1" columns="2" class="cuadro2-pago">
+                                <p:outputLabel value="DUI:" for="dui" />
+                                <p:inputText id="dui" value="#{frmCuota.scliente.dui}" title="DUI" readonly="true" class="txt-datos-cliente" />
+                                <p:outputLabel value="Nombre:" for="nombre" />
+                                <p:inputText id="nombre" value="#{frmCuota.scliente.nombre}" title="Nombre" readonly="true" class="txt-datos-cliente"/>
+                                <p:outputLabel value="Apellidos:" for="apellidos" />
+                                <p:inputText id="apellidos" value="#{frmCuota.scliente.apellido}" title="Apellidos"  readonly="true" class="txt-datos-cliente"/>
+                            </h:panelGrid>
+                                </h:panelGrid>
+                            <h:panelGrid columns="1">
+                                <h4 class="titulo-pago" style="margin: 0; ">Datos del Prestamo</h4>
+                            <h:panelGrid columns="2">
+                            <h:panelGrid id="panel-detalle2" columns="2" class="cuadro2-pago">
+                                <p:outputLabel value="N° Prestamo:" for="nprestamo" />
+                                <p:inputText id="nprestamo" value="#{frmCuota.scuota.idPrestamo}" title="N° Prestamo" readonly="true" class="txt-datos-cliente"/>
+                                <p:outputLabel value="N° Cuota:" for="numcuota" />
+                                <p:inputText id="numcuota" value="#{frmCuota.scuota.numCuota}" title="N° Cuota" readonly="true" class="txt-datos-cliente"/>
+                                <p:outputLabel value="Saldo:" for="saldo" />
+                                <p:inputNumber id="saldo" value="#{frmCuota.sprestamo.saldo}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" symbol="$" title="Saldo" readonly="true" class="txt-datos-cliente"/>
+                                
+                            </h:panelGrid>
+                            <h:panelGrid id="panel-detalle3" columns="2" class="cuadro2-pago">
+                                <p:outputLabel value="Tasa de interes:" for="tasainteres" />
+                                <p:inputNumber id="tasainteres" value="#{frmCuota.sprestamo.tasaInteres}" decimalSeparator="." thousandSeparator="," decimalPlaces="4" symbol="%" symbolPosition="s" size="15" title="Saldo" readonly="true" class="txt-datos-cliente"/>
+                                <p:outputLabel value="Valor Cuota:" for="valorcuota" />
+                                <p:inputNumber id="valorcuota" value="#{frmCuota.sprestamo.valorCuota}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" symbol="$" size="15" title="Valor Cuota" readonly="true" class="txt-datos-cliente"/>
+                            </h:panelGrid>
+                                </h:panelGrid>
+                                </h:panelGrid>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:form>
+
+
+
+
+
+                <h:form id="frm-valores">
+                    <p:growl id="msgs" showDetail="true" />  
+
+                    <h:panelGrid id="panel-general" columns="2" style="margin: 0 auto; ">
+                        <h:panelGrid id="panel-ingresado" columns="1" class="cont-pagos cont-ingresado">
+                            <h:panelGrid columns="1">
+                                <p:outputPanel class="titulo-pago">Informacion de Pagos</p:outputPanel>
+                                <h:panelGrid id="panel-seleccion" columns="2" class="cuadro2-pago">
+                                    <h:panelGrid id="pnl-division1" columns="2">
+                                    <p:outputLabel value="Cliente:" for="cliente" />
+                                    <p:inputText id="cliente" value="#{frmCuota.scliente.apellido} #{frmCuota.scliente.nombre}" title="Nombre" readonly="true"/>
+                                    <p:outputLabel value="Cuota($):" for="cuotamensual" />
+                                    <p:inputNumber id="cuotamensual" value="#{frmCuota.sprestamo.valorCuota}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Cuota Mensual" readonly="true"/>
+                                    <p:outputLabel value="Intereses($):" for="cuotainteres" />
+                                    <p:inputNumber id="cuotainteres" value="#{frmCuota.valorInteres}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Intereses" readonly="true"/>
+                                    <p:outputLabel value="Mora($):" for="cuotamora" />
+                                    <p:inputNumber id="cuotamora" value="#{frmCuota.valorMora}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Mora" readonly="true"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid id="pnl-division2" columns="2">
+                                    <p:outputLabel value="Cuota Minima($):" for="cuotaminima" />
+                                    <p:inputNumber id="cuotaminima" value="#{frmCuota.cuotaMinima}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Cuota Minima" readonly="true" />
+                                    <p:outputLabel value="Cuota Acumulada($):" for="cuotaacumulada" />
+                                    <p:inputNumber id="cuotaacumulada" value="#{frmCuota.cuotaAcumulada}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Cuota Minima" readonly="true" />
+                                    <p:outputLabel value="Total a Pagar($):" for="totalpagar" />
+                                    <p:inputNumber id="totalpagar" value="#{frmCuota.totalPagar}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Cuota Minima" readonly="true" />
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="1">
+                                <p:outputPanel class="titulo-pago">Ingresar Valor a Pagar</p:outputPanel>
+                                <h:panelGrid id="panel-pago1" columns="2">
+                                    <p:outputLabel value="Monto($):" for="dui" />
+                                    <p:inputNumber id="dui" value="#{frmCuota.scuota.valor}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Monto" symbol="$" />
+                                </h:panelGrid>
+                                <p:commandButton value="Calcular Valores" icon="fa fa-fw fa-calculator" 
+                                                 class="btn-registrarpago"
+                                                 actionListener="#{frmCuota.datosCalculados()}"
+                                                 update=":frm-valores:panel-calculado :frm-datos"
+                                                 />
+                                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <h:panelGrid id="panel-calculado"  columns="1" class="cont-pagos cont-ingresado" >
+                            <p:outputPanel class="titulo-pago">Calculado</p:outputPanel>
+                            <h:panelGrid id="panel-pago2" columns="2" class="panelgrid-pagos">
+                                <p:outputLabel value="Saldo Anterior:" for="saldoanterior" />
+                                <p:inputNumber id="saldoanterior" value="#{frmCuota.scuota.saldoAnterior}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Saldo Anterior" readonly="true" symbol="$" />
+                                <p:outputLabel value="Nuevo Saldo:" for="nuevosaldo" />
+                                <p:inputNumber id="nuevosaldo" value="#{frmCuota.scuota.saldoActualizado}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Nuevo Saldo" readonly="true" symbol="$" />
+                                <p:outputLabel value="Interes:" for="interes" />
+                                <p:inputNumber id="interes" value="#{frmCuota.scuota.interes}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Interes"  readonly="true" symbol="$"/>
+                                <p:outputLabel value="Capital:" for="capital" />
+                                <p:inputNumber id="capital" value="#{frmCuota.scuota.capital}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Capital"  readonly="true" symbol="$"/>
+                                <p:outputLabel value="Mora:" for="mora" />
+                                <p:inputNumber id="mora" value="#{frmCuota.scuota.mora}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Capital"  readonly="true" symbol="$"/>
+                            </h:panelGrid>
+                            <p:commandButton value="Registrar Pago" icon="fa fa-fw fa-edit" 
+                                             class="btn-registrarpago"
+                                             actionListener="#{frmCuota.crearPagoCuota()}"
+                                             update=":frm-valores :frm-datos"
+                                             action="#{frmCuota.comprabantePago(frmCuota.duiParam, frmCuota.idParam, frmCuota.scuota.numCuota)}"
+                                             >
+                            <h:link outcome="historialpagos.xhtml" value="Historial de Pagos"/>
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+    </f:view>
+</html>
+

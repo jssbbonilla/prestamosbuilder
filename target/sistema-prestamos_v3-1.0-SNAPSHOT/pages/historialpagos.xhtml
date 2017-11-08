@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
+    <h:head>
+        <title>Historial de Pagos</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../templates/supertemplate.xhtml">
+            <ui:define name="content">
+
+                <h:form id="frm-iniciocliente">
+                    <h:panelGrid columns="5" style="background-color:  transparent; margin: 1.5%; margin-left: 5%">
+                        <h:graphicImage id="pagoIcon"  style="background-color:  transparent" class="icon" name="/images/pago-por-clic128x128.png"  height="50" width="60"/>
+                        <p:outputLabel for="pagoIcon" value="HISTORIAL DE PAGOS" />
+                        <p:inputText class="busqueda" type="text" value="#{frmCuota.busqueda}" />
+                        <p:commandButton id="btn-search" icon="" class="fa fa-search btn-buscar" value="" style="margin-left: 50%;"
+                                         actionListener="#{frmCuota.activarBusqueda()}"
+                                         update=":frm-cuotas"
+
+                                         ></p:commandButton>
+
+                    </h:panelGrid>
+                </h:form>
+
+
+                <div class="cont-tabla">
+                    <f:view>
+                        <h:form id="frm-cuotas">
+                            <p:dataTable value="#{frmCuota.lcuota}" id="tb-cuotas" class="tableclass"
+                                         var="item"     
+                                         paginator="true"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,15,20"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         selectionMode="single"
+                                         rowKey="#{item.idPrestamo}"
+                                         selection="#{frmCuota.scuota}"
+                                         >
+                                <p:ajax event="rowSelect" listener="#{frmCuota.cambiarSeleccion}"/>
+                                <p:column headerText="ID" class="colum-id">
+                                    <f:facet name="header">
+                                        <h:outputText value="ID"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idPrestamo}"/>
+                                </p:column >
+                                <p:column headerText="N° Cuota">
+                                    <f:facet name="header">
+                                        <h:outputText value="N° Cuota"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.numCuota}"/>
+                                </p:column>
+                                <p:column headerText="Valor">
+                                    <f:facet name="header">
+                                        <h:outputText value="Valor"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.valor}"/>
+                                </p:column >
+                                <p:column  headerText="Intereses" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Intereses"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.interes}"/>
+                                </p:column>
+                                <p:column headerText="Fecha" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fecha}"/>
+                                </p:column>
+                                <p:column headerText="Capital" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Capital"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.capital}"/>
+                                </p:column>
+                                <p:column headerText="Saldo Anterior" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Saldo Anterior"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.saldoAnterior}"/>
+                                </p:column>
+                                <p:column headerText="Saldo Actualizado" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Saldo Actualizado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.saldoActualizado}"/>
+                                </p:column>
+                                <p:column style="width: 30px">
+                                    <p:commandButton id="btn-eliminar"
+                                                     icon="fa fa-fw fa-close" 
+                                                     class="btn-eliminar"
+                                                     title="Eliminar cliente"
+                                                     update=":frm-cuotas"
+                                                     style="background-color:red; border: none"
+                                                     />
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+                    </f:view>
+
+
+                </div>
+
+
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+    </f:view>
+</html>
+

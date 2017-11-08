@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
+    <h:head>
+        <title>Perfil Imagenes</title>
+    </h:head>
+    <h:body>
+        <h:form id="formFoto" enctype="multipart/form-data">
+
+            <h:panelGrid border="0"
+                         columns="1"
+                         cellspacing="5"
+                         width="100%">
+                <p:panel>
+                    <h:panelGrid columns="2" width="50%">
+                        <p:commandButton value="Establecer como foto de perfil"
+                                         
+                                         process="@form"
+                                         oncomplete="ventanaFoto.hide();"
+                                         />
+         
+
+                        <p:commandButton value="Cancelar"
+                                         type="button"
+                                         onclick="ventanaFoto.hide();"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel styleClass="editorFoto">
+                    <p:imageCropper 
+                                    
+                                    initialCoords="0,0,140,150"
+                                    minSize="70,75"
+                                    maxSize="280,300"
+                                    aspectRatio="0.9"/>
+
+                    <p:fileUpload 
+                                  mode="advanced"
+                                  label="Seleccione Foto (max.500Kb)"
+                                  auto="true"
+                                  update="formFoto"
+                                  sizeLimit="500000"
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                </p:panel>
+
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+    </f:view>
+</html>
+

@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view>
+        <f:event type="preRenderView"
+                 listener="#{frmUsuarios.initialize}" />
+        <h:head>
+            <title>Contratos</title>
+            <link href="../resources/css/styleContratos.css" rel="stylesheet" type="text/css" media="all" />
+            <f:metadata>
+                <f:viewParam name="dui" value="#{frmContratos.duiParam}"/>
+                <f:viewParam name="id" value="#{frmContratos.prestamoParam}"/>
+                }
+            </f:metadata>
+        </h:head>
+        <h:body>
+
+            <ui:composition template="../templates/supertemplate.xhtml">
+                <ui:define name="content">
+
+                    <h:form id="frm-tabs">
+                        <p:growl id="msgs" showDetail="true" />
+                        <div class="div-frm-input">
+
+                            <p:tabView id="menu-tabs" dynamic="true" cache="true" >
+                                <p:tab title="Crear Contrato">
+                                    <label style="color: #036fab; font-size: 25px; ">Datos del Contrato</label>
+
+                                    <h:panelGrid columns="2">
+
+
+                                        <h:panelGrid columns="2" style="margin-left: 5%; margin-top: 2%;">
+                                            <p:outputLabel  for="nombres" value="Nombres:"/>
+                                            <p:inputText  id="nombres"  value="#{frmContratos.scontrato.nombres}" maxlength="30" size="55" />
+                                            <p:outputLabel  for="apellidos" value="Apellidos: "/>
+                                            <p:inputText  id="apellidos"  value="#{frmContratos.scontrato.apellidos}" maxlength="250" size="55" />
+                                            <p:outputLabel  for="dui" value="DUI: "/>
+                                            <p:inputText  id="dui"  value="#{frmContratos.scontrato.dui}" maxlength="250" size="25" />
+                                            <p:outputLabel  for="ciudad" value="Ciudad: "/>
+                                            <p:inputText  id="ciudad"  value="#{frmContratos.scontrato.ciudad}" maxlength="250" size="35" />
+                                            <p:outputLabel  for="direccion" value="Direccion: "/>
+                                            <p:inputTextarea  id="direccion"  value="#{frmContratos.scontrato.direccion}" cols="55" rows="4" />
+
+                                            <p:outputLabel value="Fecha Inicio:" for="fechainicio" />
+                                            <p:calendar id="fechainicio"
+                                                        mask="true"
+                                                        size="10"
+                                                        pattern="dd/MM/yyyy" 
+                                                        effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
+                                                        value="#{frmContratos.scontrato.fechaInicio}"
+                                                        title="Fecha Inicio"
+                                                        class="text-centrado"
+                                                        >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </p:calendar>
+                                            <p:outputLabel value="Fecha Fin:" for="fechafin" />
+                                            <p:calendar id="fechafin"
+                                                        mask="true"
+                                                        size="10"
+                                                        pattern="dd/MM/yyyy" 
+                                                        effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
+                                                        value="#{frmContratos.scontrato.fechaFin}"
+                                                        title="Fecha Fin" 
+                                                        class="text-centrado"
+                                                        >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </p:calendar>
+                                            <p:outputLabel value="Monto Aproximado" for="montoaprox" />
+                                            <p:inputNumber id="montoaprox" value="#{frmContratos.scontrato.monto}" title="Monto aproximado de prestamo" decimalSeparator="." thousandSeparator="," decimalPlaces="2" symbol="$"/>
+                                            <p:outputLabel value="Tasa de interes:" for="tasainteres" />
+                                            <p:inputNumber id="tasainteres" value="#{frmContratos.scontrato.interes}" decimalSeparator="." thousandSeparator="," decimalPlaces="4" symbol="%" symbolPosition="s" size="15" title="tasa de Interes"/>
+                                            <p:outputLabel value="N° de Cuotas:" for="cantidadcuotas" />
+                                            <p:inputText id="cantidadcuotas" value="#{frmContratos.scontrato.cantidadCuotas}" title="N° de Cuotas" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) return false;"/>
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="1">
+                                            <p:commandButton id="btn-visualizar" icon="ui-icon-script"  
+                                                             class="btn-visualizar" 
+                                                             value="Visualizar"
+                                                             style="margin: 3%; margin-left: 15%;"
+                                                             actionListener="#{frmContratos.verPDF()}"
+                                                             ajax="false"
+                                                             >        
+                                            </p:commandButton>
+                                            <p:commandButton id="btn-imprimir" icon="ui-icon-print"  
+                                                             class="btn-imprimir" 
+                                                             value="Imprimir"
+                                                             style="margin: 3%; margin-left: 15%; background: #2ecc71; border: none; "
+                                                             actionListener="#{frmContratos.verPDF()}"
+                                                             ajax="false"
+                                                             >        
+                                            </p:commandButton>
+                                            <p:commandButton id="btn-guardar" icon="ui-icon-circle-plus"  
+                                                             class="btn-guardarcont" 
+                                                             value="Guardar"
+                                                             style="margin: 3%; margin-left: 15%; background: #F62A00; border: none;"
+                                                             actionListener="#{frmContratos.exportarPDF()}"
+                                                             ajax="false"
+                                                             >         
+                                            </p:commandButton>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </p:tab>
+                                
+                                <p:tab title="Editar Contrato" id="tab2">
+                                    <h:inputTextarea  value="#{frmContratos.textoContrato}" rows="20" cols="120"  />
+                                    <h:panelGrid columns="4" style="margin-top: 10px">
+                                        <p:commandButton escape="true" value="Guardar" 
+                                                         update="frm-tabs:menu-tabs" 
+                                                         actionListener="#{frmContratos.guardarContratoPersonalizado()}" 
+                                                         icon="ui-icon-disk" />
+                                        <p:commandButton id="btn-visualizarE" icon="ui-icon-script"  
+                                                             class="btn-visualizar" 
+                                                             value="Visualizar"
+                                                             style="margin: 3%; margin-left: 15%;"
+                                                             actionListener="#{frmContratos.verPDFEditor()}"
+                                                             ajax="false"
+                                                             >        
+                                            </p:commandButton>
+                                            <p:commandButton id="btn-imprimirE" icon="ui-icon-print"  
+                                                             class="btn-imprimir" 
+                                                             value="Imprimir"
+                                                             style="margin: 3%; margin-left: 15%; background: #2ecc71; border: none; "
+                                                             actionListener="#{frmContratos.verPDFEditor()}"
+                                                             ajax="false"
+                                                             >        
+                                            </p:commandButton>
+                                            <p:commandButton id="btn-guardarE" icon="ui-icon-circle-plus"  
+                                                             class="btn-guardarcont" 
+                                                             value="Guardar"
+                                                             style="margin: 3%; margin-left: 15%; background: #F62A00; border: none;"
+                                                             actionListener="#{frmContratos.exportarPDFEditor()}"
+                                                             ajax="false"
+                                                             />  
+                                        
+                                    </h:panelGrid>
+                                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"  />
+                                    <p:growl id="msgs" showDetail="true" />  
+
+                                </p:tab>
+                                <p:tab title="Contratos realizados">
+                                    <p:dataTable value="#{frmPrestamos.lprestamo}" id="tb-paso" class="tableclass"
+                                                 var="item" 
+                                                 paginator="true"
+                                                 rows="10"
+                                                 rowsPerPageTemplate="10,15,20"
+                                                 paginatorPosition="bottom"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 selectionMode="single"
+                                                 rowKey="#{item.idPrestamo}"
+                                                 selection="#{frmPrestamos.sprestamo}"
+                                                 >
+                                        <p:ajax  event="rowSelect" listener="#{frmPrestamos.cambiarSeleccion}"/>
+                                        <p:column headerText="n-prestamos" class="colum-id">
+                                            <f:facet name="header">
+                                                <h:outputText value="ID"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.idPrestamo}"/>
+                                        </p:column >
+                                        <p:column headerText="DUI">
+                                            <f:facet name="header">
+                                                <h:outputText value="Nombre"/>
+                                            </f:facet>
+                                            <h:outputText value="#{frmClientes.buscar(item.dui).nombre}"/>
+                                        </p:column>
+                                        <p:column headerText="Valor cuota" >
+                                            <f:facet name="header">
+                                                <h:outputText value="Valor cuota"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.valorCuota}"/>
+                                        </p:column>
+                                        <p:column  headerText="Monto" >
+                                            <f:facet name="header">
+                                                <h:outputText value="Monto"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.monto}"/>
+                                        </p:column>
+                                        <p:column  headerText="Interes" >
+                                            <f:facet name="header">
+                                                <h:outputText value="Interes"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.tasaInteres}"/>
+                                        </p:column>
+                                        <p:column headerText="Cuotas" >
+                                            <f:facet name="header">
+                                                <h:outputText value="Cuotas"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.cantidadCuotas}"/>
+                                        </p:column>
+                                        <p:column headerText="Capitalizacion" >
+                                            <f:facet name="header">
+                                                <h:outputText value="Capitalizacion"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.capitalizacion}"/>
+                                        </p:column>
+                                        <p:column  headerText="Fecha Inicio" >
+                                            <f:facet name="header">
+                                                <h:outputText value="Fecha Inicio"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.fechaInicio}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:button id="btn-contrato" 
+                                                      value="Contrato"
+                                                      title="Contrato" 
+                                                      outcome="contratos.xhtml?dui=#{item.dui}&amp;id=#{item.idPrestamo}"
+                                                      />
+
+                                        </p:column>
+                                    </p:dataTable>
+
+                                </p:tab>
+                            </p:tabView>
+
+                        </div>
+
+                    </h:form>
+
+                    <h:form>
+                        <p:dialog  modal="false" 
+                                   appendTo="@(body)" 
+                                   style="background-color:#EFEDEF; width: 80%;" 
+                                   showEffect="blind" 
+                                   hideEffect="blind" 
+                                   widgetVar="Nprestamo" 
+                                   draggable="false" 
+                                   closeOnEscape="true" 
+                                   resizable="true">
+
+                            <p:ajax event="close" 
+
+                                    immediate="true" global="false" />
+
+                            <h:form id="visual-pdf">
+                                <p:media value="/resources/pdf/prueba.pdf" width="100%" height="400px"/>
+
+                            </h:form>
+
+
+                        </p:dialog>
+                    </h:form>
+
+                </ui:define>
+            </ui:composition>
+
+        </h:body>
+    </f:view>
+</html>
+

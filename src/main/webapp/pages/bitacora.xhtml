@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
+    <h:head>
+        <title>Historial del Sistema</title>
+    </h:head>
+  
+
+    <h:body>
+
+        <ui:composition template="../templates/halftemplate.xhtml" >
+            <ui:define name="content">
+                
+                <h:form id="frm-iniciocliente">
+                    <h:panelGrid columns="5" style="background-color:  transparent; margin: 1.5%; margin-left: 5%">
+                        <p:outputLabel  value="Filtrar" />
+                        <p:inputText class="busqueda" type="text" value="#{frmClientes.busqueda}" />
+                       
+                        </h:panelGrid>    
+                </h:form>
+
+                <div >
+                    <f:view>
+                        <h:form >
+                            <p:dataTable value="#{frmBitacora.lbitacora}" id="tb-clientes" class="tableclass"
+                                         var="item"     
+                                         paginator="true"
+                                         rows="25"
+                                         rowsPerPageTemplate="15,25,40"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         selectionMode="single"
+                                         rowKey="#{item.id_usuario}"
+                                         selection="#{frmBitacora.sbitacora}"
+                                         >
+                                <p:ajax event="rowSelect" />
+                                <p:column headerText="Registro" class="colum-id">
+                                    <f:facet name="header">
+                                        <h:outputText value="Registro"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id_bitacora}"/>
+                                </p:column >
+                                
+                                <p:column headerText="Usuario">
+                                    <f:facet name="header">
+                                        <h:outputText value="Usuario"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id_usuario}"/>
+                                </p:column >
+                                <p:column headerText="Accíon" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Acción"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.accion}"/>
+                                </p:column>
+                                <p:column headerText="Fecha" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fecha}"/>
+                                </p:column>
+                                <p:column style="width: 70px">
+                                    <f:facet name="header">
+                                    </f:facet>
+                                    
+                                    <p:button id="btn-info" 
+                                              icon="fa fa-fw fa-info" 
+                                              class="btn-detalle"
+                                              title="Detalles"
+                                              />
+                                </p:column>
+                             
+                            </p:dataTable>
+                        </h:form>
+                    </f:view>
+                    
+                  
+
+                    <p:growl id="msgs" showDetail="true" />  
+                   
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"  />
+
+                </div>
+                
+               
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+    </f:view>
+</html>
+

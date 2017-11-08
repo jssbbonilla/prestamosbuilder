@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+              <link rel="stylesheet" href="../resources/css/style.css"/>
+                            <link rel="stylesheet" href="../resources/css/animations.css"/>
+
+
+    </h:head>
+    <h:body>
+        <div class="wrapper">
+	<div class="container">
+		<h1 class="flash animated infinite">Sistema de Prestamos</h1>
+                <h1 class="pulse animated infinite">Bievenido</h1>
+		
+                <h:form styleClass="form">
+                    <p:inputText  styleClass="input-user" type="text" placeholder="Usuario" value="#{frmUsuarios.usuario.login}"/>
+                    
+                    <p:password  styleClass="input-user"  id="nonFeedback" value="#{frmUsuarios.usuario.clave}" />
+
+                    <p:commandButton  id="login-button"  actionListener="#{frmUsuarios.login()}" update="msg" value="Entrar"></p:commandButton>
+		</h:form>
+	</div>
+        </div>
+                        <p:growl  id="msg" showDetail="true"/>
+
+    </h:body>
+</html>
+

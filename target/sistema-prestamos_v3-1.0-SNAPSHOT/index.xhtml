@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Sistema de Préstamos</title>
+
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="resources/css/index-css/styleServices.css" rel="stylesheet" type="text/css" media="all" />	
+        <link href="resources/css/stylePrestamos.css" rel="stylesheet" type="text/css" media="all" /> 
+        <link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="resources/css/template/footer-with-logo.css" rel="stylesheet" type="text/css" media="all"/>
+
+        <!-- start-smoth-scrolling -->
+    </head>
+    <body style="  background: #eee">
+
+        <div id="top">
+            <ui:insert name="top">
+                <h:form>
+                    <div class="arriba" >
+                        <div class="top-bar">
+
+                            <h2 id="topic-header" class="tituloheader"></h2>
+
+
+                        </div>
+                    </div>
+                </h:form>
+            </ui:insert>
+        </div>
+
+        <!--Opciones-->
+        <div class="service" id="services">
+            <div class="container">
+                <div class="about-w3l">
+                    <h3>¡ Hola #{user.getNombre()} ! ¿Por dónde comenzamos? </h3>
+                    <div class="about-t">
+                        <b></b>
+                        <b class="line"></b>
+                    </div>
+                </div>
+                <div class="service-head">	
+                    <div class="col-md-3 w3ls ">
+                        <div class=" ser-grid ">
+                            <div class=" hi-icon-effect-7 hi-icon-effect-7a">
+                                <i class="fa fa-credit-card hi-icon " onClick="location.href = '/sistema-prestamos_v3/faces/pages/prestamos.xhtml'" > </i>
+                            </div>
+                            <h3>Préstamos</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls ">
+                        <div class=" ser-grid ser-grid1 ">
+                            <div class=" hi-icon-effect-7 hi-icon-effect-7a">
+                                <i class="glyphicon glyphicon-user hi-icon " onClick="location.href = '/sistema-prestamos_v3/faces/pages/clientes.xhtml'" > </i>
+                            </div>
+                            <h3>Clientes</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls">
+                        <div class=" ser-grid ser-grid2 ">
+                            <div class=" hi-icon-effect-7 hi-icon-effect-7a">
+                                <i class="fa fa-id-card-o hi-icon " onClick="location.href = '/sistema-prestamos_v3/faces/pages/usuarios.xhtml'" > </i>
+                            </div>
+                            <h3>Usuarios</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls ">
+                        <div class=" ser-grid ser-grid3 ">
+                            <div class=" hi-icon-effect-7 hi-icon-effect-7a">
+                                <i class="glyphicon glyphicon-wrench hi-icon" onClick="location.href = '/sistema-prestamos_v3/faces/pages/configuracion.xhtml'" > </i>
+                            </div>
+                            <h3>Sistema</h3>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+
+        <!--footer-->
+        <footer id="myFooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h5>Aplicacion</h5>
+                        <ul>
+                            <li><a href="#">Incicio</a></li>
+                            <li><a href="#">Registrarse</a></li>
+                            <li><a href="#">Downloads</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Sobre Nosotros</h5>
+                        <ul>
+                            <li><a href="#">Universidad de El Salvador</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">Diseño de Sistemas II</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Soporte</h5>
+                        <ul>
+                            <li><a href="https://github.com/kkevin7">GitHub</a></li>
+                            <li><a href="#">Correo</a></li>
+                            <li><a href="#">Forums</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3 info">
+                        <h5>Informacion</h5>
+                        <p> Somos estudiantes de la Universidad Nacional de El Salvador dispuestos a realizar una una aplicacion web para la asignatura de Diseño de Sistemas II.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="second-bar">
+                <div class="container">
+                    <h3 class="logo"><h:link value="Sistema Prestamos"></h:link></h3>
+                    <div class="social-icons">
+                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--//footer-->
+
+        <!--//Servicios-->
+
+
+
+
+
+
+
+    </body>
+</html>

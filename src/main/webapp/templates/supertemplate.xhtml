@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="../resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="../resources/css/template/side-bar-new.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="../resources/css/stylePrestamos.css" rel="stylesheet" type="text/css" media="all" /> 
+        <link href="../resources/css/template/footer-with-logo.css" rel="stylesheet" type="text/css" media="all"/>
+        <title>Sistema Prestamos</title>
+    </h:head>
+
+    <h:body>
+
+        <!-- MENU IZQUIERDO -->
+        <div id="left">
+            <ui:insert name="left">
+
+                <div class="wrapper">
+                    <!-- Sidebar Holder -->
+                    <nav id="sidebar">
+                        <div class="sidebar-header">
+                            <h3>Sistema Prestamos</h3>
+                            <strong>SP</strong>
+                        </div>
+
+                        <ul class="list-unstyled components">
+                            <li>
+                                <h:link outcome="/index.xhtml">
+                                    <i class="glyphicon glyphicon-home"></i>
+                                    Inicio
+                                </h:link>
+                            </li>
+                            <li>
+
+                                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                                    <i class="glyphicon glyphicon-duplicate"></i>
+                                    Pages
+                                </a>
+                                <ul class="collapse list-unstyled" id="pageSubmenu">
+                                    <li><h:link outcome="clientes.xhtml" value="Clientes"/></li>
+                                    <li><h:link outcome="prestamos.xhtml" value="Prestamos"/></li>
+                                    <li><h:link outcome="usuarios.xhtml" value="Usuarios"/></li>
+                                    <li><h:link outcome="historialpagos.xhtml" value="Historial de Pagos"/></li>
+                                    <li><h:link outcome="bitacora.xhtml" value="Bitacora"/></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#reporteSubmenu" data-toggle="collapse" aria-expanded="false">
+                                    <i class="fa fa-print"></i>
+                                    Reportes
+                                </a>
+                                <ul class="collapse list-unstyled" id="reporteSubmenu">
+                                    <li><h:link outcome="contratos.xhtml" value="Contratos"/></li>
+                                    <li><a href="#">Estado de resultado</a></li>
+                                    <li><a href="#">Balance</a></li>
+                                    <li><a href="#">Prestamos Realizados</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <h:link outcome="configuracion.xhtml">
+                                    <i class="glyphicon glyphicon-wrench hi-icon"></i>
+                                    Configuracion
+                                </h:link>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                    <!-- Page Content Holder -->
+                    <div id="content" style="width:100%;">
+
+                        <!-- HEADER DE SISTEMA PRESTAMOS -->
+                        <div id="top">
+                            <ui:insert name="top">
+
+                                <nav class="navbar navbar-default">
+                                    <div class="container-fluid">
+
+                                        <div class="navbar-header">
+                                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                                                <i class="glyphicon glyphicon-align-left"></i>
+                                                <span>Menu Completo</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                            <h:form>
+                                                <nav id="menu-nav" class="linkEffects linkHoverEffect_12 nav-cont">
+                                                    <ul>
+
+
+                                                        <p:splitButton value="#{user.getLogin()}" actionListener="#{buttonView.save}"  icon="fa fa-user-circle-o" >
+
+                                                            <p:menuitem value="Salir" actionListener="#{frmUsuarios.logout()}" ajax="false" icon="ui-icon-close" />
+                                                            <p:separator />
+                                                        </p:splitButton>
+
+                                                    </ul>
+                                                </nav>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </ui:insert>
+                        </div>
+                        <!-- FIN DEL HEADER DEL SISTEMA PRESTAMO -->
+
+                        <!-- TABLAS DEL SISTEMA PRESTAMOS -->
+                        <div id="content" class="left_content" style="margin-top: -2%; width: 100%;">
+                            <ui:insert name="content">
+
+
+                            </ui:insert>
+                        </div>
+                        <!--FIN TABLAS DEL SISTEMA PRESTAMOS -->
+
+
+                        
+
+                    </div>   
+                </div>
+            </ui:insert>
+        </div>
+        
+        <!-- FOOTER SISTEMA PRESTAMOS -->
+                        <div id="bottom">
+                            <ui:insert name="bottom">
+
+                                <footer id="myFooter">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h5>Aplicacion</h5>
+                                                <ul>
+                                                    <li><a href="#">Incicio</a></li>
+                                                    <li><a href="#">Registrarse</a></li>
+                                                    <li><a href="#">Downloads</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h5>Sobre Nosotros</h5>
+                                                <ul>
+                                                    <li><a href="#">Universidad de El Salvador</a></li>
+                                                    <li><a href="#">Contact us</a></li>
+                                                    <li><a href="#">Diseño de Sistemas II</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h5>Soporte</h5>
+                                                <ul>
+                                                    <li><a href="https://github.com/kkevin7">GitHub</a></li>
+                                                    <li><a href="#">Correo</a></li>
+                                                    <li><a href="#">Forums</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-3 info">
+                                                <h5>Informacion</h5>
+                                                <p> Somos estudiantes de la Universidad Nacional de El Salvador dispuestos a realizar una una aplicacion web para la asignatura de Diseño de Sistemas II.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="second-bar">
+                                        <div class="container">
+                                            <h3 class="logo"><h:link value="Sistema Prestamos"></h:link></h3>
+                                            <div class="social-icons">
+                                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                                <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </footer>
+
+
+                            </ui:insert>
+                        </div>
+                        <!-- FOOTER SISTEMA PRESTAMOS -->
+
+
+        <!-- Bootstrap Js CDN -->
+        <script src="../resources/js/bootstrap-js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
+            });
+        </script>
+    </h:body>
+
+</html>

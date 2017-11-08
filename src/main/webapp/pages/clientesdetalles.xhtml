@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
+    <h:head>
+        <f:metadata>
+            <f:viewParam name="dui" value="#{frmclientedetalle.duiParam}"/>
+        </f:metadata>
+        <title>Informacion Cliente</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="../templates/supertemplate.xhtml">
+            <ui:define name="content" class="cont-principal">
+
+
+                <h:form id="frm-datosclientes">
+                    <div style="margin-top: 20px; margin-bottom: 20px">
+                        <h:panelGrid columns="3" style="width: 50%; background: #ACD0C0; margin: 0 auto; ">        
+
+                            <h:panelGrid columns="1"  class="cuadro1">
+                                <h:graphicImage id="pagoIcon"  style="background-color:  transparent" class="icon" name="/images/client128x128.png" height="100" width="100"/>
+                                <p:outputLabel for="pagoIcon" value="Detalles Clientes" />
+                            </h:panelGrid>
+
+                            <h:panelGrid id="panel-detalle1" columns="2" class="cuadro2" style="width: 150px">
+                                <h:outputLabel value="DUI:" for="dui" />
+                                <h:inputText id="dui" value="#{frmclientedetalle.scliente.dui}" title="DUI" readonly="true" />
+                                <h:outputLabel value="NII:" for="nit" />
+                                <h:inputText id="nit" value="#{frmclientedetalle.scliente.nit}" title="NIT" readonly="true" />
+                                <h:outputLabel value="Nombre:" for="nombre" />
+                                <h:inputText id="nombre" value="#{frmclientedetalle.scliente.nombre}" title="Nombre" readonly="true" />
+                                <h:outputLabel value="Apellidos:" for="apellidos" />
+                                <h:inputText id="apellidos" value="#{frmclientedetalle.scliente.apellido}" title="Apellidos"  readonly="true" />
+                            </h:panelGrid>
+
+
+                            <h:panelGrid id="panel-detalle2" columns="2" class="cuadro2">
+                                <h:outputLabel value="Sexo:" for="sexo" />
+                                <h:inputText id="sexo" value="#{frmclientedetalle.scliente.sexo}" title="Sexo" readonly="true" />
+                                <h:outputLabel value="Fecha de Nacimiento:" for="fechanacimiento" />
+                                <h:inputText id="fechanacimiento" value="#{frmclientedetalle.scliente.fechaNacimiento}" title="Fecha de Nacimiento" readonly="true" />
+                                <h:outputLabel value="Direccion:" for="direccion" />
+                                <h:inputText id="direccion" value="#{frmclientedetalle.scliente.direcion}" title="Direccion" readonly="true" />
+                                <h:outputLabel value="Telefono:" for="telefono" />
+                                <h:inputText id="telefono" value="#{frmclientedetalle.scliente.telefono}" title="Telefono" readonly="true" />
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+                    </div>
+                </h:form>
+
+
+                <h:form id="frm-actividades" >
+
+                    <p:growl id="msgs" showDetail="true" /> 
+
+                    <p:tabView id="tabs" class="paneltabs">
+                        <p:tab title="Activades" >
+                            <h:panelGrid columns="1" cellpadding="10">
+                                <p:accordionPanel style="width: 100%">
+                                    <p:tab title="Historial de Prestamos">
+                                        <!-- aqui comienza la tabla-->
+
+                                        <p:separator/>
+                                        <p:dataTable id="prestamos1"  value="#{frmclientedetalle.lprestamo}" 
+                                                     style="margin:20px; font-size: 14px; text-align: center" 
+                                                     var="item" 
+                                                     paginator="true"
+                                                     rows="5"
+                                                     rowsPerPageTemplate="5,10,15"
+                                                     paginatorPosition="bottom"
+                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     >
+                                            <f:facet name="header">
+                                                Historial de Prestamos
+                                            </f:facet>
+                                            <p:column headerText="Estado" style="width:80px">
+                                                <h:outputText value="#{item.estado}"/>
+                                            </p:column>
+                                            <p:column headerText="Ultimo Pago" style="width:80px">
+                                                <h:outputText value="#{item.fechaUltimoPago}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Monto" style="width:80px">
+                                                <h:outputText value="#{item.monto}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Saldo" style="width:80px">
+                                                <h:outputText value="#{item.saldo}"/>
+                                            </p:column>
+
+                                            <p:column headerText="Cuotas" style="width:80px">
+                                                <h:outputText value="#{item.cantidadCuotas}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </p:tab>
+
+
+                                    <p:tab title="Historial de Pagos" >
+                                        <p:separator/>
+                                        <p:dataTable value="#{frmclientedetalle.lcuota}" var="pago" style="margin:20px" 
+                                                     scrollable="true" scrollHeight="300">
+                                            <f:facet name="header">
+                                                Historial de pagos
+                                            </f:facet>
+                                            <p:column headerText="N° Cuota">
+                                                <h:outputText value="#{pago.numCuota}"  />
+
+                                            </p:column>
+                                           
+                                            <p:column headerText="Capital">
+
+                                                <h:outputText value="#{pago.capital}"/>
+                                            </p:column>
+                                            <p:column headerText="Interes">
+
+                                                <h:outputText value="#{pago.interes}"/>
+                                            </p:column>
+                                            <p:column headerText="Saldo">
+
+                                                <h:outputText value="#{pago.saldoActualizado}"/>
+                                            </p:column>
+                                            <p:column headerText="Fecha de Pago">
+
+                                                <h:outputText value="#{pago.fecha}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </p:tab>
+                                    
+                                </p:accordionPanel>
+                            </h:panelGrid>
+                        </p:tab>
+
+
+
+                        <p:tab title="Editar Cliente">
+                            <p:accordionPanel>
+                                <p:tab title="Datos">
+                            <p:panelGrid columns="2">
+                                <p:panelGrid id="panel-crud1" columns="2" style="border: none"  >
+                                    <p:outputLabel value="DUI:" for="dui-p" />
+                                    <p:inputMask id="dui-p" mask="99999999-9" value="#{frmclientedetalle.ecliente.dui}" title="Dui del cliente" maxlength="10"/>
+                                    <p:outputLabel value="NIT" for="nit-p" />
+                                    <p:inputMask id="nit-p" mask="9999-999999-999-9" value="#{frmclientedetalle.ecliente.nit}" title="NIT" maxlength="17"/>
+                                    <p:outputLabel value="Nombre:" for="nombre-p" />
+                                    <p:inputText id="nombre-p" value="#{frmclientedetalle.ecliente.nombre}" title="Nombre" maxlength="45"/>
+                                    <p:outputLabel value="Apellidos:" for="apellidos-p" />
+                                    <p:inputText id="apellidos-p" value="#{frmclientedetalle.ecliente.apellido}" title="Apellidos"  maxlength="45"/>
+                                    <p:outputLabel value="Sexo:" for="sexo-p" />
+                                    <p:inputText id="sexo-p" value="#{frmclientedetalle.ecliente.sexo}" title="Sexo" maxlength="1"/>
+                                </p:panelGrid>
+                                <p:panelGrid id="panel-crud2" columns="2" style="border: none"  >
+                                    <p:outputLabel value="Fecha de Nacimiento:" for="fechanacimiento-p" />
+                                    <p:calendar id="fechanacimiento-p"
+                                            mask="99/99/9999"
+                                            size="10"
+                                            pattern="dd/MM/yyyy" 
+                                            effect="blind" navigator="true" showOn="button" yearRange="-100:+0"
+                                            value="#{frmclientedetalle.ecliente.fechaNacimiento}"
+                                            >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                                    <p:outputLabel value="Direccion:" for="direccion-p" />
+                                    <p:inputTextarea id="direccion-p" value="#{frmclientedetalle.ecliente.direcion}" title="Direccion" />
+                                    <p:outputLabel value="Telefono:" for="telefono-p" />
+                                    <p:inputMask id="telefono-p" mask="9999-9999" value="#{frmclientedetalle.ecliente.telefono}" title="Telefono" maxlength="50"/>
+                                    <p:outputLabel value="Observacion:" for="observacion-p" />
+                                    <p:inputTextarea id="observacion-p" value="#{frmclientedetalle.ecliente.observacion}" title="Obervacion" />
+                                </p:panelGrid>
+                                <p:commandButton value="Modificar" icon="fa fa-fw fa-floppy-o" class="btn-crear"
+                                                 update=":frm-datosclientes:panel-detalle1 :frm-datosclientes:panel-detalle2" 
+                                                 actionListener="#{frmclientedetalle.modificar()}"
+                                                 process="@form"
+                                                 />
+                            </p:panelGrid>
+                            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"  />
+                        </p:tab>
+                                <p:tab title="Documentos">
+
+
+                                        <p:dataTable value="#{frmclientedetalle.ldoc}" id="tb-documentos" class="tableclass"
+                                                     var="var"     
+                                                     paginator="true"
+                                                     rows="10"
+                                                     rowsPerPageTemplate="10,15,20"
+                                                     paginatorPosition="bottom"
+                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                     rowKey="#{var.dui}"
+
+                                                     >
+                                            <p:column headerText="Nombre Archivo">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nombre Archivo"/>
+                                                </f:facet>
+                                                <h:outputText value="#{var.nombre}"/>
+                                            </p:column >
+                                            <p:column style="width: 70px">
+                                                <f:facet name="header">
+                                                </f:facet>
+
+                                                <p:button id="btn-info" 
+                                                          icon="fa fa-fw fa-info" 
+                                                          class="btn-detalle"
+
+                                                          title="Detalles del cliente"
+                                                          />
+                                                <p:commandButton id="btn-eliminar"
+                                                                 icon="fa fa-fw fa-close" 
+                                                                 class="btn-eliminar"
+                                                                 title="Eliminar documento"
+                                                                 actionListener="#{frmclientedetalle.eliminarDocumento(var)}"
+                                                                 update="tb-documentos"
+                                                                 style="background-color:red; border: none"
+                                                                 />
+
+                                            </p:column>
+                                        </p:dataTable>
+
+                                        <p:separator/>
+
+
+                                            <p:fileUpload fileUploadListener="#{frmclientedetalle.handleFileUpload}" 
+                                                          mode="advanced" 
+                                                          update="messages" 
+                                                          sizeLimit="100000" 
+                                                          fileLimit="3" 
+                                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                            <br/>
+                                        <h:panelGrid id="panel-detalle-subir" columns="2" class="cuadro2">
+                                            <p:outputLabel value="Descripcion:" for="descripciond"/>
+                                            <p:inputTextarea id="descripciond" value="#{frmclientedetalle.desc}" title="Descripcion"/>
+                                        </h:panelGrid>
+
+                                        <p:separator/>
+                                    </p:tab>
+                   
+                            </p:accordionPanel>
+                        </p:tab>
+                         
+
+                    </p:tabView>
+                </h:form>
+                 <p:dialog id="dialog" 
+                          modal="false" 
+
+                          style="background-color:#EFEDEF; text-align: center" 
+                          showEffect="blind" hideEffect="blind" 
+                          widgetVar="agregarCliente"   
+                          header="Agregar Clientes"  
+                          draggable="false" 
+                          closeOnEscape="true" 
+                          appendTo="@(body)" 
+
+                          resizable="false">
+                    <p:ajax event="close" 
+
+
+                            immediate="true" global="false" />
+                    <h:form id="subir" enctype="multipart/form-data">
+                        <p:graphicImage height="96" width="96"  name="images/upload.png" style="text-align:  center" />
+<br/>
+<p:fileUpload fileUploadListener="#{frmclientedetalle.upload}" mode="advanced" dragDropSupport="true"
+              fileLimit="3" allowTypes="/(\.|\/)(pdf)$/"  update="@all"  />
+ 
+   
+                        <br/>
+                     
+
+
+
+
+
+                    </h:form>
+                </p:dialog>
+               
+
+
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+    </f:view>
+</html>
+

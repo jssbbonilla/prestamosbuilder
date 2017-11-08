@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="../resources/css/stylePrestamos.css" rel="stylesheet" type="text/css" media="all" /> 
+        <link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all"/>
+        <title>Sistema Prestamos</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <h:form>
+                    <div class="arriba" >
+                        <div class="top-bar">
+                            <nav id="menu-nav" class="linkEffects linkHoverEffect_12 nav-cont">
+                                <ul>
+
+
+                                    <p:splitButton value="#{user.getLogin()}" actionListener="#{buttonView.save}" icon="fa fa-user-circle-o" >
+                                        <p:menuitem value="Opciones de administrador" outcome="bitacora.xhtml"  ajax="false" icon="fa fa-user-circle-o"  rendered="#{(user.getRol()=='a')?'true':'false'}" />
+                                        <p:menuitem value="Salir" actionListener="#{frmUsuarios.logout()}" ajax="false" icon="ui-icon-close" />
+
+                                        <p:separator />
+                                    </p:splitButton>
+
+                                </ul>
+                            </nav>  
+                            <h2 id="topic-header" class="tituloheader"><i class="fa fa-usd"></i> Sistema Prestamos <i class="fa fa-desktop" ></i></h2>
+
+
+                        </div>
+                    </div>
+                </h:form>
+            </ui:insert>
+        </div>
+
+
+        <div>
+            <div id="left" style="width: 12%;">
+                <ui:insert name="left">
+                    <div class="sidebar-fondo">
+                        <div class="sidebar" id="menu">
+                            <h2>Menú</h2>
+                            <ul>
+                                <li><h:link outcome="clientes.xhtml" value="Clientes"/></li>
+                                <li><h:link outcome="prestamos.xhtml" value="Prestamos"/></li>
+                                <li><h:link outcome="historialpagos.xhtml" value="Historial de Pagos"/></li>
+                                <li><h:link outcome="configuracion.xhtml" value="Configuración"/></li>
+                                <li><h:link outcome="contratos.xhtml" value="Contratos"/></li>
+                            </ul>   
+                        </div>
+                    </div>
+
+                </ui:insert>
+            </div>
+
+        </div>
+        <div>
+
+            <div id="content" class="left_content" style="width: 88%; margin-left: 12%">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+
+
+        </div>
+
+
+        <div id="bottom">
+            <ui:insert name="bottom">
+
+                <!--footer-->
+                <footer class="mandarabajo">
+                    <div class="agileits-w3layouts-footer ">
+                        <div class="container">
+                            <div class="col-md-4 w3-agile-grid">
+                                <h6 id="topic-footer" class="titulo-footer">Acerca de Nosotros</h6>
+                                <h5 id="topic-footer2" class="oculto titulo-footer">Sistemas Prestamos</h5>
+                                <p id="text-footer">Somos estudiantes de la Universidad Nacional de El Salvador dispuestos a realizar una una aplicacion web para la asignatura de Diseño de Sistemas</p>
+                                <div class="agileinfo-social-grids">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clearfix"> </div>     
+                        </div>
+                    </div>
+                    <div class="copyright">
+                        <div class="container">
+                            <p id="copy">© 2017 UES. Todos los derechos reservados | Diseñado por <a href="">Estudiante de Ingeniería.</a></p>
+                            <p id="copy2" class="oculto">© 2017 UES. Todos los derechos reservados</p>
+                        </div>
+                    </div>
+                </footer>      
+                <!--//footer-->
+
+            </ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

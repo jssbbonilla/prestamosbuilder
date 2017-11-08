@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="comprobantePago" pageWidth="842" pageHeight="320" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80025ecd-6c25-442a-86a6-d7bf02ab36d7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="num_cuota" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_prestamo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     cuota.`id_prestamo` AS cuota_id_prestamo,
+     cuota.`num_cuota` AS cuota_num_cuota,
+     cuota.`valor` AS cuota_valor,
+     cuota.`interes` AS cuota_interes,
+     cuota.`fecha` AS cuota_fecha,
+     cuota.`capital` AS cuota_capital,
+     cuota.`saldo_anterior` AS cuota_saldo_anterior,
+     cuota.`saldo_actualizado` AS cuota_saldo_actualizado,
+     cuota.`mora` AS cuota_mora,
+     cliente.`dui` AS cliente_dui,
+     cliente.`nombres` AS cliente_nombres,
+     cliente.`apellidos` AS cliente_apellidos,
+     prestamo.`id_prestamo` AS prestamo_id_prestamo,
+     prestamo.`dui` AS prestamo_dui,
+     prestamo.`monto` AS prestamo_monto,
+     prestamo.`tasa_interes` AS prestamo_tasa_interes,
+     prestamo.`estado` AS prestamo_estado,
+     prestamo.`tasa_mora` AS prestamo_tasa_mora
+FROM
+     `cliente` cliente INNER JOIN `prestamo` prestamo ON cliente.`dui` = prestamo.`dui`
+     INNER JOIN `cuota` cuota ON prestamo.`id_prestamo` = cuota.`id_prestamo`
+WHERE cuota.`num_cuota`=$P{num_cuota} AND cuota.`id_prestamo`=$P{id_prestamo}]]>
+	</queryString>
+	<field name="cuota_id_prestamo" class="java.lang.Integer"/>
+	<field name="cuota_num_cuota" class="java.lang.Integer"/>
+	<field name="cuota_valor" class="java.lang.Double"/>
+	<field name="cuota_interes" class="java.lang.Double"/>
+	<field name="cuota_fecha" class="java.sql.Date"/>
+	<field name="cuota_capital" class="java.lang.Double"/>
+	<field name="cuota_saldo_anterior" class="java.lang.Double"/>
+	<field name="cuota_saldo_actualizado" class="java.lang.Double"/>
+	<field name="cuota_mora" class="java.lang.Double"/>
+	<field name="cliente_dui" class="java.lang.String"/>
+	<field name="cliente_nombres" class="java.lang.String"/>
+	<field name="cliente_apellidos" class="java.lang.String"/>
+	<field name="prestamo_id_prestamo" class="java.lang.Integer"/>
+	<field name="prestamo_dui" class="java.lang.String"/>
+	<field name="prestamo_monto" class="java.lang.Double"/>
+	<field name="prestamo_tasa_interes" class="java.lang.Double"/>
+	<field name="prestamo_estado" class="java.lang.String"/>
+	<field name="prestamo_tasa_mora" class="java.lang.Double"/>
+	<group name="cuota_num_cuota">
+		<groupExpression><![CDATA[$F{cuota_num_cuota}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="125">
+			<staticText>
+				<reportElement x="125" y="12" width="193" height="56" uuid="1636f5c3-d970-4d45-b303-5fc67acb9671"/>
+				<text><![CDATA[Santa Ana
+www.rolfin.xxx
+Alexander Calderón Peraza
+Tel. 7777-6666]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="603" y="14" width="192" height="76" uuid="3e3f6449-4104-4090-87c8-302927770e0c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="656" y="22" width="100" height="20" uuid="9a7fbf0b-44f6-4db7-8f99-774482ac8283"/>
+				<textElement>
+					<font fontName="Monospaced" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPROBANTE]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="660" y="42" width="96" height="32" forecolor="#F3190D" backcolor="#FEFEFE" uuid="27c27d53-d8e7-49f5-b405-4778ddc53e9d"/>
+				<textElement textAlignment="Right">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cuota_num_cuota}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="327" y="10" width="198" height="44" uuid="9371a143-4d91-4c4b-aa38-6e19b94553c0"/>
+				<textElement>
+					<font fontName="Monospaced" size="13"/>
+				</textElement>
+				<text><![CDATA[REGISTRO No. 164690-0
+NIT: 0614-270586-103-0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="54" width="255" height="44" uuid="42971782-0906-42e2-9287-5679e3c5e143"/>
+				<text><![CDATA[RESOLUCIÓN: 15041-RES-IN-58175-2016
+SERIE AUT: 16SD003F1001 AL 16SD003F4000
+FECHA AUT: 20/12/2016, FECHA IMP: 12/2016]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="116" width="800" height="1" uuid="614354e6-ff6e-44d2-99cf-7a60b87163ef"/>
+			</line>
+			<staticText>
+				<reportElement x="609" y="42" width="100" height="26" forecolor="#FF0000" uuid="5060377a-cc47-436d-a171-dc962fb37b7c"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="122">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="7" width="86" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="0438d703-2e2a-43d4-8886-5bacd1cf49b6"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Préstamo No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="77" width="52" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="c636418f-7977-458e-9749-5224bd9265bf"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAGO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="96" y="7" width="28" height="20" uuid="5bd4d3f3-4c3b-461f-add5-8011d09a5102"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cuota_id_prestamo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="66" y="78" width="64" height="20" forecolor="#FF0000" backcolor="#FF0000" uuid="74cf933e-0f34-423e-ae71-6ae75f5dd07b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA['$'+$F{cuota_valor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="315" y="78" width="86" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="580c2a39-5194-446b-85f6-52eb3e319f68"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A intereses]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="408" y="78" width="40" height="20" uuid="5640e4ff-654a-4d28-a89f-36f3c0345f1c"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA['$'+$F{cuota_interes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="669" y="8" width="40" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="cacb3b7b-a3b8-484e-9895-91daf42e022b"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="709" y="8" width="84" height="20" uuid="1ca26ce6-6c28-44b6-8b45-fb9be17e4687"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{cuota_fecha}.getDay()+8)+"/"+($F{cuota_fecha}.getMonth()+1)+"/"+($F{cuota_fecha}.getYear()+1900)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="149" y="78" width="61" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="8ecc4b90-1c7e-4315-969c-4912c104441f"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A Capital]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="459" y="49" width="123" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="c45607f9-1661-41b3-805c-2c5fdfc99eb7"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo Anterior]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="459" y="77" width="123" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="2a721338-bea5-4fa1-8f83-ea6b5b48f772"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo Actualizado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="696" y="47" width="34" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="d798ef33-8168-49f3-b64d-8464e83247dc"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mora]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="215" y="77" width="87" height="20" uuid="17e9fba1-1a66-4c46-97d8-8f6b5d02ff4d"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA['$'+$F{cuota_capital}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="601" y="49" width="79" height="20" uuid="c2b53566-2765-4170-8453-32c008445eeb"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA['$'+$F{cuota_saldo_anterior}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="604" y="77" width="73" height="20" uuid="c3840c33-afb3-494e-bc9f-3af68fd180ef"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA['$'+$F{cuota_saldo_actualizado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="742" y="49" width="58" height="20" uuid="0e3e4191-3535-4c47-9aad-72a957edfd83"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA['$'+$F{cuota_mora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="134" y="8" width="26" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="879dda08-2b43-4f46-8717-d07dd627805f"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DUI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="278" y="7" width="49" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="e3cb1e17-05a1-4e2d-b86a-22863b10656f"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="475" y="7" width="60" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="31d965ea-3b9f-463b-b7a2-59042644aec4"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="170" y="7" width="96" height="20" uuid="e8fc9334-5167-452b-804f-441967d7e5ac"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_dui}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="338" y="7" width="127" height="20" uuid="8238f9e6-61a2-463a-9d21-a455a48ae511"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_nombres}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="543" y="7" width="117" height="20" uuid="39537b3a-b5b2-44d2-80ee-c67fbcfd57cd"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_apellidos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="148" y="50" width="43" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="f5cb5284-7612-4b68-ad64-52e442588d7b"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="314" y="50" width="64" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="628178e4-3372-4cfb-af9b-92ac3c232ba9"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tasa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="49" width="52" height="20" forecolor="#010101" backcolor="#E6E6E6" uuid="4b515558-4d3f-48ca-b98f-be041cf2f15a"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="197" y="50" width="105" height="20" uuid="10f89c58-4a2f-402d-b08c-c9b8e09a6600"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA['$'+$F{prestamo_monto}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="386" y="50" width="41" height="20" uuid="d2a25bb7-cf6a-44ae-966a-0208255002ce"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prestamo_tasa_interes}+'%']]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="66" y="49" width="64" height="20" uuid="bd661297-e8fb-492b-88ba-26dcb083506e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{prestamo_estado}.equals("A") ? "ACTIVO" : "INACTIVO" )]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="39" width="800" height="1" uuid="5753afc1-956b-4630-a50e-75be1413bfcb"/>
+			</line>
+			<staticText>
+				<reportElement x="409" y="102" width="158" height="20" uuid="e25d410e-f160-4d91-9aa1-9d6c25f3c5dd"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma y Sello Cajero]]></text>
+			</staticText>
+			<line>
+				<reportElement x="573" y="120" width="211" height="1" uuid="d4d43859-8b67-4caf-84ff-b838f32c3af7"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18">
+			<staticText>
+				<reportElement x="630" y="0" width="100" height="17" forecolor="#F10A0A" uuid="ee3c9612-371b-448a-bcf6-23cc8740b43f"/>
+				<text><![CDATA[Duplicado-Cliente]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
