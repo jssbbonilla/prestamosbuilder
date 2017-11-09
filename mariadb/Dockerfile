@@ -10,7 +10,7 @@ RUN apt-get install wget -y
 RUN wget https://github.com/jssbbonilla/prestamosbuilder/blob/master/mariadb/prestamosv3.sql
 RUN ls
 RUN pwd
-ADD /prestamosv3.sql /docker-entrypoint-initdb.d/prestamosv3sql.sql
+ADD ./prestamosv3.sql /docker-entrypoint-initdb.d/prestamosv3sql.sql
 EXPOSE 3306
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["mysqld"]
